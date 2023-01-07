@@ -8,5 +8,7 @@ public interface PessoaService {
 
     List<Pessoa> findAll();
 
+    Pessoa findById(Long id);
+
     Pessoa insert(Pessoa pessoa);
 }

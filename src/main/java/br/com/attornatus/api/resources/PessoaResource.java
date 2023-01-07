@@ -20,9 +20,15 @@ public class PessoaResource {
     @GetMapping
     public ResponseEntity<List<Pessoa>> findAll() {
         List<Pessoa> pessoas = service.findAll();
-        System.out.println(pessoas);
         return new ResponseEntity<List<Pessoa>>(pessoas, HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Pessoa> findById(@PathVariable Long id) {
+        var pessoa = service.findById(id);
+        return new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
+    }
+
 
     @PostMapping
     public ResponseEntity<Pessoa> insert(@RequestBody Pessoa pessoa, UriComponentsBuilder uriBuilder) {

@@ -12,10 +12,15 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String logradouro;
+
     private String cep;
+
     private long numero;
+
     private String cidade;
+
     private boolean enderecoPrincipal;
 
     @JsonIgnore

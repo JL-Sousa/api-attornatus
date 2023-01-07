@@ -20,6 +20,13 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
+    public Pessoa findById(Long id) {
+        var pessoa = repository.findById(id).get();
+        System.out.println(pessoa);
+        return pessoa;
+    }
+
+    @Override
     public Pessoa insert(Pessoa pessoa) {
         pessoa.getEnderecos().forEach(endereco -> endereco.setPessoa(pessoa));
         return repository.save(pessoa);

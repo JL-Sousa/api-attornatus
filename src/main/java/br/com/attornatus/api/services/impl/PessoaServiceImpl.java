@@ -1,5 +1,6 @@
 package br.com.attornatus.api.services.impl;
 
+import br.com.attornatus.api.dto.PessoaCadastradaDTO;
 import br.com.attornatus.api.entities.Pessoa;
 import br.com.attornatus.api.repository.PessoaRepository;
 import br.com.attornatus.api.services.PessoaService;
@@ -27,8 +28,10 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
-    public Pessoa insert(Pessoa pessoa) {
+    public PessoaCadastradaDTO insert(Pessoa pessoa) {
         pessoa.getEnderecos().forEach(endereco -> endereco.setPessoa(pessoa));
-        return repository.save(pessoa);
+        repository.save(pessoa);
+        PessoaCadastradaDTO pessoaCadastrada = new PessoaCadastradaDTO(pessoa.getId(), pessoa.getNome());
+        return pessoaCadastrada;
     }
 }

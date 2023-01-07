@@ -1,5 +1,6 @@
 package br.com.attornatus.api.resources;
 
+import br.com.attornatus.api.dto.PessoaCadastradaDTO;
 import br.com.attornatus.api.entities.Pessoa;
 import br.com.attornatus.api.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,10 @@ public class PessoaResource {
 
 
     @PostMapping
-    public ResponseEntity<Pessoa> insert(@RequestBody Pessoa pessoa, UriComponentsBuilder uriBuilder) {
-        Pessoa pessoaCadastrada = service.insert(pessoa);
+    public ResponseEntity<PessoaCadastradaDTO> insert(@RequestBody Pessoa pessoa, UriComponentsBuilder uriBuilder) {
+        PessoaCadastradaDTO pessoaCadastrada = service.insert(pessoa);
 
-        var uri = uriBuilder.path("/pessoas/{id}").buildAndExpand(pessoaCadastrada.getId()).toUri();
+        var uri = uriBuilder.path("/pessoas/{id}").buildAndExpand(pessoaCadastrada.id()).toUri();
         return ResponseEntity.created(uri).body(pessoaCadastrada);
     }
 }

@@ -18,4 +18,10 @@ public class PessoaServiceImpl implements PessoaService {
     public List<Pessoa> findAll() {
         return repository.findAll();
     }
+
+    @Override
+    public Pessoa insert(Pessoa pessoa) {
+        pessoa.getEnderecos().forEach(endereco -> endereco.setPessoa(pessoa));
+        return repository.save(pessoa);
+    }
 }

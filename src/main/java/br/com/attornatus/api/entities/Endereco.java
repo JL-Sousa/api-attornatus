@@ -1,5 +1,6 @@
 package br.com.attornatus.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -13,21 +14,24 @@ public class Endereco {
     private Long id;
     private String logradouro;
     private String cep;
-    private String numero;
+    private long numero;
     private String cidade;
+    private boolean enderecoPrincipal;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pessoa_id", referencedColumnName ="id")
     private Pessoa pessoa;
 
     public Endereco() {}
 
-    public Endereco(Long id, String logradouro, String cep, String numero, String cidade, Pessoa pessoa) {
+    public Endereco(Long id, String logradouro, String cep, long numero, String cidade, boolean enderecoPrincipal, Pessoa pessoa) {
         this.id = id;
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
+        this.enderecoPrincipal = enderecoPrincipal;
         this.pessoa = pessoa;
     }
 
@@ -55,11 +59,11 @@ public class Endereco {
         this.cep = cep;
     }
 
-    public String getNumero() {
+    public long getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(long numero) {
         this.numero = numero;
     }
 
@@ -77,6 +81,14 @@ public class Endereco {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public boolean isEnderecoPrincipal() {
+        return enderecoPrincipal;
+    }
+
+    public void setEnderecoPrincipal(boolean enderecoPrincipal) {
+        this.enderecoPrincipal = enderecoPrincipal;
     }
 
     @Override

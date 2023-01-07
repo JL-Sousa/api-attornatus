@@ -25,7 +25,7 @@ public class Endereco {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "pessoa_id", referencedColumnName ="id")
+    @JoinColumn(name = "pessoa_id", referencedColumnName ="id", foreignKey = @ForeignKey(name = "fk_pessoa"))
     private Pessoa pessoa;
 
     public Endereco() {}

@@ -23,7 +23,7 @@ public class Pessoa {
     private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Endereco> enderecos = new ArrayList<>();
+    private List<Endereco> enderecos = new ArrayList<Endereco>();
 
     public Pessoa() {}
 

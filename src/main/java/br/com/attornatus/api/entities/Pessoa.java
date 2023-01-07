@@ -1,13 +1,14 @@
 package br.com.attornatus.api.entities;
 
+import br.com.attornatus.api.dto.PessoaDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tb_pessoas")
@@ -27,10 +28,17 @@ public class Pessoa {
 
     public Pessoa() {}
 
-    public Pessoa(Long id, String nome, LocalDate dataNascimento) {
+    public Pessoa(Long id, String nome, LocalDate dataNascimento, List<Endereco> enderecos) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
+        this.enderecos = enderecos;
+    }
+
+    public Pessoa(PessoaDTO pessoaDTO) {
+        this.nome = pessoaDTO.getNome();
+        this.dataNascimento = pessoaDTO.getDataNascimento();
+        this.enderecos.addAll(pessoaDTO.getEnderecos().stream().map(Endereco::new).collect(Collectors.toList()));
     }
 
     public Long getId() {

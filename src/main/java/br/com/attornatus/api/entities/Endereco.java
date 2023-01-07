@@ -1,5 +1,6 @@
 package br.com.attornatus.api.entities;
 
+import br.com.attornatus.api.dto.EnderecoDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -38,6 +39,15 @@ public class Endereco {
         this.cidade = cidade;
         this.enderecoPrincipal = enderecoPrincipal;
         this.pessoa = pessoa;
+    }
+
+    public Endereco(EnderecoDTO enderecoDTO) {
+        this.id = enderecoDTO.id();
+        this.logradouro = enderecoDTO.logradouro();
+        this.cep =  enderecoDTO.cep();
+        this.numero =  enderecoDTO.numero();
+        this.cidade =  enderecoDTO.cidade();
+        this.enderecoPrincipal =  enderecoDTO.enderecoPrincipal();
     }
 
     public Long getId() {

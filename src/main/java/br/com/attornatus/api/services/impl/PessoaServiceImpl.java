@@ -1,11 +1,13 @@
 package br.com.attornatus.api.services.impl;
 
 import br.com.attornatus.api.dto.PessoaCadastradaDTO;
+import br.com.attornatus.api.dto.PessoaDTO;
 import br.com.attornatus.api.entities.Pessoa;
 import br.com.attornatus.api.repository.PessoaRepository;
 import br.com.attornatus.api.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,17 +23,17 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
-    public Pessoa findById(Long id) {
-        var pessoa = repository.findById(id).get();
-        System.out.println(pessoa);
-        return pessoa;
+    public PessoaDTO findById(Long id) {
+        Pessoa pessoa = repository.findById(id).get();
+        return new PessoaDTO(pessoa);
     }
 
     @Override
-    public PessoaCadastradaDTO insert(Pessoa pessoa) {
+    @Transactional
+    public PessoaCadastradaDTO insert(PessoaDTO pessoaDTO) {
+        Pessoa pessoa = new Pessoa(pessoaDTO);
         pessoa.getEnderecos().forEach(endereco -> endereco.setPessoa(pessoa));
         repository.save(pessoa);
-        PessoaCadastradaDTO pessoaCadastrada = new PessoaCadastradaDTO(pessoa.getId(), pessoa.getNome());
-        return pessoaCadastrada;
+        return new PessoaCadastradaDTO(pessoa.getId(), pessoa.getNome());
     }
 }

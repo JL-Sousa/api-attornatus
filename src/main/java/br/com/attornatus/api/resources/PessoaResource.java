@@ -1,6 +1,7 @@
 package br.com.attornatus.api.resources;
 
 import br.com.attornatus.api.dto.PessoaCadastradaDTO;
+import br.com.attornatus.api.dto.PessoaDTO;
 import br.com.attornatus.api.entities.Pessoa;
 import br.com.attornatus.api.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +26,22 @@ public class PessoaResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pessoa> findById(@PathVariable Long id) {
+    public ResponseEntity<PessoaDTO> findById(@PathVariable Long id) {
         var pessoa = service.findById(id);
-        return new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
+        return new ResponseEntity<PessoaDTO>(pessoa, HttpStatus.OK);
     }
 
 
     @PostMapping
-    public ResponseEntity<PessoaCadastradaDTO> insert(@RequestBody Pessoa pessoa, UriComponentsBuilder uriBuilder) {
-        PessoaCadastradaDTO pessoaCadastrada = service.insert(pessoa);
+    public ResponseEntity<PessoaCadastradaDTO> insert(@RequestBody PessoaDTO pessoaDTO, UriComponentsBuilder uriBuilder) {
 
+        PessoaCadastradaDTO pessoaCadastrada = service.insert(pessoaDTO);
         var uri = uriBuilder.path("/pessoas/{id}").buildAndExpand(pessoaCadastrada.id()).toUri();
         return ResponseEntity.created(uri).body(pessoaCadastrada);
+    }
+
+    @PutMapping
+    public ResponseEntity<Pessoa> update(@RequestBody Pessoa pessoa) {
+        return null;
     }
 }

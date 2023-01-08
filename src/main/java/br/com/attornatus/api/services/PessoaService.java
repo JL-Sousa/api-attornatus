@@ -1,5 +1,6 @@
 package br.com.attornatus.api.services;
 
+import br.com.attornatus.api.dto.PessoaAtualizarDTO;
 import br.com.attornatus.api.dto.PessoaCadastradaDTO;
 import br.com.attornatus.api.dto.PessoaDTO;
 import br.com.attornatus.api.entities.Pessoa;
@@ -13,4 +14,6 @@ public interface PessoaService {
     PessoaDTO findById(Long id);
 
     PessoaCadastradaDTO insert(PessoaDTO pessoaDTO);
+
+    PessoaDTO update(Long id, PessoaAtualizarDTO pessoaAtualizarDTO);
 }

@@ -1,5 +1,6 @@
 package br.com.attornatus.api.entities;
 
+import br.com.attornatus.api.dto.PessoaAtualizarDTO;
 import br.com.attornatus.api.dto.PessoaDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
@@ -73,6 +74,7 @@ public class Pessoa {
         this.enderecos = enderecos;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,4 +89,6 @@ public class Pessoa {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
+
 }

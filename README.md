@@ -5,26 +5,22 @@
 # Índice
 
 - [Sobre](#-sobre)
+- [Funcionalidaes](#-tecnologias-utilizadas)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Como baixar o projeto](#-como-baixar-o-projeto)
 
-## 📝Sobre
+# 📝Sobre
 
 Usando Spring boot, desenvolve uma API simples para gerenciar Pessoas. 
 
 ## 📝Funcionalidades
-• Criar uma pessoa
-<h1>
-    <img src="main/java/resources/static/inserir.gif">
-</h1>
-
-
-• Editar uma pessoa
-• Consultar uma pessoa
-• Listar pessoas
-• Criar endereço para pessoa
-• Listar endereços da pessoa
-• Poder informar qual endereço é o principal da pessoa
+- Criar uma pessoa
+- Editar uma pessoa
+- Consultar uma pessoa
+- Listar pessoas
+- Criar endereço para pessoa
+- Listar endereços da pessoa
+- Poder informar qual endereço é o principal da pessoa
 
 ---
 
@@ -32,10 +28,11 @@ Usando Spring boot, desenvolve uma API simples para gerenciar Pessoas.
 
 O projeto foi desenvolvido utilizando as seguintes tecnologias
 
-- React
-- CSS-Modules
-- Typescript
-- Vite
+- Spring Boot
+- Java 17
+- H2 Database
+- Maven
+- Swagger
 
 ---
 
@@ -43,19 +40,18 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
 
 ```bash
 # Clonar o repositório
-$ git clone https://github.com/JL-Sousa/organo-spa.git
+$ git clone https://github.com/JL-Sousa/api-attornatus
 
-# Entrar no diretório
-$ cd organo
+# Importar na sua IDE favorita
 
 # Baixar as Dependencias
-$ yarn ou npm install
 
 # Iniciar o projeto
-para rodar o projeto
-$ yarn dev ou npm run dev
 ```
 
 ---
+
+Com a aplicação rodando voce pode acessar a Documentacao Swagger.
+Acessando este Link: http://localhost:8080/swagger-ui.html
 
 🔥Desenvolvido por \***\*_Jonyelson Lopes_\*\***

@@ -1,6 +1,5 @@
 package br.com.attornatus.api.services;
 
-import br.com.attornatus.api.dto.PessoaAtualizarDTO;
 import br.com.attornatus.api.dto.PessoaCadastradaDTO;
 import br.com.attornatus.api.dto.PessoaDTO;
 import br.com.attornatus.api.entities.Pessoa;
@@ -9,11 +8,11 @@ import java.util.List;
 
 public interface PessoaService {
 
-    List<Pessoa> findAll();
+    List<PessoaDTO> findAll();
 
     PessoaDTO findById(Long id);
 
     PessoaCadastradaDTO insert(PessoaDTO pessoaDTO);
 
-    PessoaDTO update(Long id, PessoaAtualizarDTO pessoaAtualizarDTO);
+    Pessoa update(Pessoa Pessoa);
 }

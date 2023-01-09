@@ -21,11 +21,17 @@ public class PessoaServiceImpl implements PessoaService {
     private PessoaRepository repository;
 
     @Override
-    public List<Pessoa> findAll() {return repository.findAll();}
+    @Transactional(readOnly = true)
+    public List<PessoaDTO> findAll() {
+
+        List<Pessoa> pessoas = repository.findAll();
+        return pessoas.stream().map(PessoaDTO::new).collect(Collectors.toList());
+    }
 
     @Override
+    @Transactional(readOnly = true)
     public PessoaDTO findById(Long id) {
-        Pessoa pessoa = repository.findById(id).get();
+        Pessoa pessoa = repository.getReferenceById(id);
         return new PessoaDTO(pessoa);
     }
 
@@ -40,12 +46,10 @@ public class PessoaServiceImpl implements PessoaService {
 
     @Override
     @Transactional
-    public PessoaDTO update(Long id, PessoaAtualizarDTO pessoaAtualizarDTO) {
-        Pessoa pessoa = repository.getReferenceById(id);
-        pessoa.setNome(pessoaAtualizarDTO.getNome());
-        pessoa.setDataNascimento(pessoaAtualizarDTO.getDataNascimento());
-        pessoa.setEnderecos(pessoaAtualizarDTO.getEnderecos().stream().map(Endereco::new).collect(Collectors.toList()));
-        pessoa = repository.save(pessoa);
-        return new PessoaDTO(pessoa);
+    public Pessoa update(Pessoa pessoa) {
+
+        pessoa.getEnderecos().forEach(endereco -> endereco.setPessoa(pessoa));
+        Pessoa usuarioSalvo = repository.save(pessoa);
+        return usuarioSalvo;
     }
 }

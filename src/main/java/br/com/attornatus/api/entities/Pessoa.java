@@ -24,7 +24,7 @@ public class Pessoa {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> enderecos = new ArrayList<Endereco>();
 
     public Pessoa() {}
@@ -91,4 +91,10 @@ public class Pessoa {
     }
 
 
+    public void atualizarDadosPessoa(PessoaAtualizarDTO pessoaAtualizarDTO) {
+        this.nome = pessoaAtualizarDTO.getNome();
+        this.dataNascimento = pessoaAtualizarDTO.getDataNascimento();
+        this.enderecos.clear();
+        this.enderecos = pessoaAtualizarDTO.getEnderecos().stream().map(Endereco::new).collect(Collectors.toList());
+    }
 }

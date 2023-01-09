@@ -25,7 +25,7 @@ public class Endereco {
     private boolean enderecoPrincipal;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "pessoa_id", referencedColumnName ="id", foreignKey = @ForeignKey(name = "fk_pessoa"))
     private Pessoa pessoa;
 

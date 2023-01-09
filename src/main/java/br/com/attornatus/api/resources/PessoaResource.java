@@ -1,6 +1,4 @@
 package br.com.attornatus.api.resources;
-
-import br.com.attornatus.api.dto.PessoaAtualizarDTO;
 import br.com.attornatus.api.dto.PessoaCadastradaDTO;
 import br.com.attornatus.api.dto.PessoaDTO;
 import br.com.attornatus.api.entities.Pessoa;
@@ -22,9 +20,9 @@ public class PessoaResource {
     private PessoaService service;
 
     @GetMapping
-    public ResponseEntity<List<Pessoa>> findAll() {
-        List<Pessoa> pessoas = service.findAll();
-        return new ResponseEntity<List<Pessoa>>(pessoas, HttpStatus.OK);
+    public ResponseEntity<List<PessoaDTO>> findAll() {
+        List<PessoaDTO> pessoas = service.findAll();
+        return new ResponseEntity<List<PessoaDTO>>(pessoas, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
@@ -42,9 +40,9 @@ public class PessoaResource {
         return ResponseEntity.created(uri).body(pessoaCadastrada);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<PessoaDTO> update(@PathVariable Long id, @RequestBody PessoaAtualizarDTO pessoaAtualizarDTO) {
-        PessoaDTO pessoaDTO = service.update(id, pessoaAtualizarDTO);
-        return ResponseEntity.ok().body(pessoaDTO);
+    @PutMapping
+    public ResponseEntity<Pessoa> update(@RequestBody Pessoa pessoa) {
+        Pessoa pessoaCad = service.update(pessoa);
+        return ResponseEntity.ok().body(pessoaCad);
     }
 }

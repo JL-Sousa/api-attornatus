@@ -5,6 +5,8 @@ import br.com.attornatus.api.entities.Pessoa;
 import br.com.attornatus.api.services.PessoaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +22,9 @@ public class PessoaResource {
     private PessoaService service;
 
     @GetMapping
-    public ResponseEntity<List<PessoaDTO>> findAll() {
-        List<PessoaDTO> pessoas = service.findAll();
-        return new ResponseEntity<List<PessoaDTO>>(pessoas, HttpStatus.OK);
+    public ResponseEntity<Page<PessoaDTO>> findAll(Pageable pageable) {
+        Page<PessoaDTO> pessoas = service.findAll(pageable);
+        return new ResponseEntity<Page<PessoaDTO>>(pessoas, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
@@ -31,10 +33,8 @@ public class PessoaResource {
         return new ResponseEntity<PessoaDTO>(pessoa, HttpStatus.OK);
     }
 
-
     @PostMapping
     public ResponseEntity<PessoaCadastradaDTO> insert(@RequestBody @Valid PessoaDTO pessoaDTO, UriComponentsBuilder uriBuilder) {
-
         PessoaCadastradaDTO pessoaCadastrada = service.insert(pessoaDTO);
         var uri = uriBuilder.path("/pessoas/{id}").buildAndExpand(pessoaCadastrada.id()).toUri();
         return ResponseEntity.created(uri).body(pessoaCadastrada);

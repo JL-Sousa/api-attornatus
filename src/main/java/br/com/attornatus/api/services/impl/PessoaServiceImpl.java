@@ -1,18 +1,15 @@
 package br.com.attornatus.api.services.impl;
 
-import br.com.attornatus.api.dto.PessoaAtualizarDTO;
 import br.com.attornatus.api.dto.PessoaCadastradaDTO;
 import br.com.attornatus.api.dto.PessoaDTO;
-import br.com.attornatus.api.entities.Endereco;
 import br.com.attornatus.api.entities.Pessoa;
 import br.com.attornatus.api.repository.PessoaRepository;
 import br.com.attornatus.api.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PessoaServiceImpl implements PessoaService {
@@ -22,16 +19,15 @@ public class PessoaServiceImpl implements PessoaService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<PessoaDTO> findAll() {
-
-        List<Pessoa> pessoas = repository.findAll();
-        return pessoas.stream().map(PessoaDTO::new).collect(Collectors.toList());
+    public Page<PessoaDTO> findAll(Pageable pageable) {
+        Page<Pessoa> pessoas = repository.findAll(pageable);
+        return pessoas.map(x -> new PessoaDTO(x));
     }
 
     @Override
     @Transactional(readOnly = true)
     public PessoaDTO findById(Long id) {
-        Pessoa pessoa = repository.getReferenceById(id);
+        Pessoa pessoa = repository.findById(id).get();
         return new PessoaDTO(pessoa);
     }
 

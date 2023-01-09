@@ -3,7 +3,6 @@ import br.com.attornatus.api.dto.PessoaCadastradaDTO;
 import br.com.attornatus.api.dto.PessoaDTO;
 import br.com.attornatus.api.entities.Pessoa;
 import br.com.attornatus.api.services.PessoaService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping(value = "/pessoas")

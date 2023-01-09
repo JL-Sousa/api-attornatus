@@ -3,8 +3,9 @@ package br.com.attornatus.api.entities;
 import br.com.attornatus.api.dto.PessoaAtualizarDTO;
 import br.com.attornatus.api.dto.PessoaDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
 
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

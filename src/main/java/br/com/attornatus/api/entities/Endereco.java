@@ -2,8 +2,8 @@ package br.com.attornatus.api.entities;
 
 import br.com.attornatus.api.dto.EnderecoDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
